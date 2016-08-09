@@ -141,9 +141,9 @@ public class DBUtil {
 			driver = (Driver) Class.forName("oracle.jdbc.driver.OracleDriver",true, DBUtil.class.getClassLoader()).newInstance();
 			conn = driver.connect(URL, properties);
 		} catch (SQLException e) {
-			logger.error("Got error while creating oracle connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating oracle connection." + ImpedUtil.getErrorStackTrace(e));
 		} catch (Exception e) {
-			logger.error("Got error while creating oracle connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating oracle connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -161,9 +161,9 @@ public class DBUtil {
 			driver = (Driver) Class.forName("oracle.jdbc.driver.OracleDriver",true, DBUtil.class.getClassLoader()).newInstance();
 			conn = driver.connect(URL, properties);
 		} catch (SQLException e) {
-			logger.error("Got error while creating oracle connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating oracle connection." + ImpedUtil.getErrorStackTrace(e));
 		} catch (Exception e) {
-			logger.error("Got error while creating oracle connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating oracle connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -175,9 +175,9 @@ public class DBUtil {
 			Class.forName("com.teradata.jdbc.TeraDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			logger.error("Got error while creating teradata connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating teradata connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			logger.error("Got error while creating teradata connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating teradata connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -192,9 +192,9 @@ public class DBUtil {
 			Class.forName("com.teradata.jdbc.TeraDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			logger.error("Got error while creating teradata connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating teradata connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			logger.error("Got error while creating teradata connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating teradata connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -206,9 +206,9 @@ public class DBUtil {
 			Class.forName("com.teradata.jdbc.TeraDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			logger.error("Got error while creating teradata connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating teradata connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			logger.error("Got error while creating teradata connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating teradata connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -276,11 +276,11 @@ public class DBUtil {
 			Class.forName("org.apache.hadoop.hive.jdbc.HiveDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			System.out.println("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			System.out.println("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -292,11 +292,11 @@ public class DBUtil {
 			Class.forName("org.apache.hadoop.hive.jdbc.HiveDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			System.out.println("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			System.out.println("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -308,11 +308,11 @@ public class DBUtil {
 			Class.forName("org.apache.hive.jdbc.HiveDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			System.out.println("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			System.out.println("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating hive connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating hive connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -324,11 +324,11 @@ public class DBUtil {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			System.out.println("Got error while creating mysql connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating mysql connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating mysql connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating mysql connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			System.out.println("Got error while creating mysql connection." + XINEUtil.getErrorStackTrace(e));
-			logger.error("Got error while creating mysql connection." + XINEUtil.getErrorStackTrace(e));
+			System.out.println("Got error while creating mysql connection." + ImpedUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating mysql connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -343,7 +343,7 @@ public class DBUtil {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		}catch (Exception e) {
-			logger.error("Got error while creating sql server connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating sql server connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}

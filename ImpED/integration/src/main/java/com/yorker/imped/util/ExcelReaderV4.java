@@ -27,7 +27,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import com.yorker.imped.exceptions.XINEServiceException;
+import com.yorker.imped.exceptions.ImpedServiceException;
 import com.yorker.imped.vo.ExcelMetadataVO;
 
 // TODO: Auto-generated Javadoc
@@ -300,9 +300,9 @@ public class ExcelReaderV4 {
 	 * @param in the in
 	 * @return the list
 	 * @throws InvalidFormatException the invalid format exception
-	 * @throws XINEServiceException the XINE service exception
+	 * @throws ImpedServiceException the XINE service exception
 	 */
-	public static List<ExcelMetadataVO> loadExcelMetadata(InputStream in) throws InvalidFormatException, XINEServiceException {
+	public static List<ExcelMetadataVO> loadExcelMetadata(InputStream in) throws InvalidFormatException, ImpedServiceException {
 		List<ExcelMetadataVO> VOtable = null;
 		try {
 			OPCPackage p = OPCPackage.open(in);

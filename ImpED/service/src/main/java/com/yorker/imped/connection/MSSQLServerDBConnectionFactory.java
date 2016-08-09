@@ -10,8 +10,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.yorker.imped.util.DBUtil;
-import com.yorker.imped.util.XINEConstants;
-import com.yorker.imped.util.XINEUtil;
+import com.yorker.imped.util.ImpedConstants;
+import com.yorker.imped.util.ImpedUtil;
 
 public class MSSQLServerDBConnectionFactory  extends AbstractDBConnectionFactory{
 	
@@ -42,7 +42,7 @@ public class MSSQLServerDBConnectionFactory  extends AbstractDBConnectionFactory
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection(URL, username,password);
 		}catch (Exception e) {
-			logger.error("Got error while creating sql server connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating sql server connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -58,28 +58,6 @@ public class MSSQLServerDBConnectionFactory  extends AbstractDBConnectionFactory
 		DBUtil.closeConnection(connection,null,null);
 	}
 	
-	public List<String> getSchemas(String filter) {
-		List<String> schemas = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet rs = null;
-		String sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA";
-		try{
-		preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setFetchSize(XINEConstants.REC_FETCH_SIZE);
-		rs = preparedStatement.executeQuery();
-		schemas = new ArrayList<String>();
-		while (rs.next()) {
-			schemas.add(rs.getString("SCHEMA_NAME").toUpperCase());
-		}
-		}catch (Exception e) {
-			logger.error("Exception occured while getting getSchemas()" + e.getMessage());
-		} finally {
-			DBUtil.closeConnection(connection,rs,preparedStatement);
-			logger.debug("Exiting getSchemas method ....");
-		}
-		return schemas;
-	}
-
 	@Override
 	public Object executeStatement(String sql, String error, Object param) {
 		// TODO Auto-generated method stub

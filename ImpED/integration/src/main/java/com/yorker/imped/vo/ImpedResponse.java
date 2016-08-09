@@ -1,6 +1,6 @@
 package com.yorker.imped.vo;
 
-public class XINEResponse {
+public class ImpedResponse {
 
 	private String responseCode;
 	private String responseDesc;

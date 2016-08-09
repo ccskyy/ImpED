@@ -27,7 +27,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import com.yorker.imped.exceptions.XINEServiceException;
+import com.yorker.imped.exceptions.ImpedServiceException;
 import com.yorker.imped.vo.ExcelMetadataVO;
 import com.yorker.imped.vo.UploadExcelVO;
 import com.yorker.imped.connection.AbstractDBConnectionFactory;
@@ -166,8 +166,8 @@ public class ExcelWritingImpl {
 				factory.addRecords(insertSQL, rowList,vo.getStartTime());
 				if(factory.getErrorMsg() != null && !factory.getErrorMsg().isEmpty()) {
 					try {
-						throw new XINEServiceException("Excel sheet error",factory.getErrorMsg());
-					} catch (XINEServiceException e) {
+						throw new ImpedServiceException("Excel sheet error",factory.getErrorMsg());
+					} catch (ImpedServiceException e) {
 						e.printStackTrace();
 					}
 				}
@@ -292,8 +292,8 @@ public class ExcelWritingImpl {
 				 factory.addRecords(insertSQL, rowList,vo.getStartTime());
 				 if(factory.getErrorMsg() != null && !factory.getErrorMsg().isEmpty()) {
 					try {
-						throw new XINEServiceException("Excel sheet error",factory.getErrorMsg());
-					} catch (XINEServiceException e) {
+						throw new ImpedServiceException("Excel sheet error",factory.getErrorMsg());
+					} catch (ImpedServiceException e) {
 						e.printStackTrace();
 					}
 				 }
@@ -314,9 +314,9 @@ public class ExcelWritingImpl {
 	 * @param insertSQL the insert sql
 	 * @param colVSDef the col vs def
 	 * @throws InvalidFormatException the invalid format exception
-	 * @throws XINEServiceException the XINE service exception
+	 * @throws ImpedServiceException the XINE service exception
 	 */
-	public static void insertExcelData(InputStream in, UploadExcelVO vo, AbstractDBConnectionFactory factory, String insertSQL, Map<String, String> colVSDef) throws InvalidFormatException, XINEServiceException {
+	public static void insertExcelData(InputStream in, UploadExcelVO vo, AbstractDBConnectionFactory factory, String insertSQL, Map<String, String> colVSDef) throws InvalidFormatException, ImpedServiceException {
 		try {
 			OPCPackage p = OPCPackage.open(in);
 			ExcelWritingImpl xlsx2csv = new ExcelWritingImpl(p, System.out, vo, factory, insertSQL, colVSDef);

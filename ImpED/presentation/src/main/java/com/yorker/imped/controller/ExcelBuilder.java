@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
-import com.yorker.imped.util.XINEUtil;
+import com.yorker.imped.util.ImpedUtil;
 import com.yorker.imped.vo.ExcelResponse;
 
 /**
@@ -92,7 +92,7 @@ public class ExcelBuilder extends AbstractExcelView {
 	            }
 		    }
 		}catch (Exception e) {
-			logger.error("Error occurred in buildXL4Data(). Error details :: "+ XINEUtil.getErrorStackTrace(e));
+			logger.error("Error occurred in buildXL4Data(). Error details :: "+ ImpedUtil.getErrorStackTrace(e));
 	    }
 	}
 	

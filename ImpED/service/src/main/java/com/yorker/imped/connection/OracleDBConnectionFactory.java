@@ -11,8 +11,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.yorker.imped.util.DBUtil;
-import com.yorker.imped.util.XINEConstants;
-import com.yorker.imped.util.XINEUtil;
+import com.yorker.imped.util.ImpedConstants;
+import com.yorker.imped.util.ImpedUtil;
 
 public class OracleDBConnectionFactory extends AbstractDBConnectionFactory {
 	
@@ -80,12 +80,12 @@ public class OracleDBConnectionFactory extends AbstractDBConnectionFactory {
 			}
 		}catch (Exception e) {
 			long time = new Date().getTime();
-			logger.error("Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + XINEUtil.getErrorStackTrace(e));
-			errorMsg = "Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + e.getMessage();
+			logger.error("Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + ImpedUtil.getErrorStackTrace(e));
+			errorMsg = "Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + e.getMessage();
 		}catch (Error e) {
 			long time = new Date().getTime();
-			logger.error("Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + XINEUtil.getErrorStackTrace(e));
-			errorMsg = "Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + e.getMessage();
+			logger.error("Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + ImpedUtil.getErrorStackTrace(e));
+			errorMsg = "Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + e.getMessage();
 		} finally {
 			DBUtil.closeConnection(null, rs, ps, st);
 		}
@@ -114,12 +114,12 @@ public class OracleDBConnectionFactory extends AbstractDBConnectionFactory {
 			recCnt = ps.executeBatch();
 		}catch (Exception e) {
 			long time = new Date().getTime();
-			logger.error("Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + XINEUtil.getErrorStackTrace(e));
-			this.errorMsg = "Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + e.getMessage();
+			logger.error("Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + ImpedUtil.getErrorStackTrace(e));
+			this.errorMsg = "Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + e.getMessage();
 		}catch (Error e) {
 			long time = new Date().getTime();
-			logger.error("Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + XINEUtil.getErrorStackTrace(e));
-			this.errorMsg = "Error occured while executing sql : " + XINEConstants.STR_REF + time + ":" + e.getMessage();
+			logger.error("Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + ImpedUtil.getErrorStackTrace(e));
+			this.errorMsg = "Error occured while executing sql : " + ImpedConstants.STR_REF + time + ":" + e.getMessage();
 		}  finally {
 			DBUtil.closeConnection(null, null, ps);
 		}

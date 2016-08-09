@@ -11,8 +11,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.yorker.imped.util.DBUtil;
-import com.yorker.imped.util.XINEConstants;
-import com.yorker.imped.util.XINEUtil;
+import com.yorker.imped.util.ImpedConstants;
+import com.yorker.imped.util.ImpedUtil;
 
 public class MySQLDBConnectionFactory  extends AbstractDBConnectionFactory{
 
@@ -40,9 +40,9 @@ public class MySQLDBConnectionFactory  extends AbstractDBConnectionFactory{
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(URL, username,password);
 		} catch (SQLException e) {
-			logger.error("Got error while creating mysql connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating mysql connection." + ImpedUtil.getErrorStackTrace(e));
 		}catch (Exception e) {
-			logger.error("Got error while creating mysql connection." + XINEUtil.getErrorStackTrace(e));
+			logger.error("Got error while creating mysql connection." + ImpedUtil.getErrorStackTrace(e));
 		}
 		return conn;
 	}
@@ -58,29 +58,6 @@ public class MySQLDBConnectionFactory  extends AbstractDBConnectionFactory{
 		DBUtil.closeConnection(connection,null,null);
 	}
 	
-	public List<String> getSchemas(String filter) {
-		List<String> schemas = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet rs = null;
-		String sql = "SELECT TRIM(UPPER(D.NAME)) AS DATABASE_NAME FROM hive.DBS D";
-		try{
-		preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setFetchSize(XINEConstants.REC_FETCH_SIZE);
-		rs = preparedStatement.executeQuery();
-		schemas = new ArrayList<String>();
-		while (rs.next()) {
-			schemas.add(rs.getString("DATABASE_NAME"));
-		}
-		}catch (Exception e) {
-			logger.error("Exception occured while getting getSchemas()" + e.getMessage());
-		} finally {
-			DBUtil.closeConnection(connection,rs,preparedStatement);
-			logger.debug("Exiting getSchemas method ....");
-		}
-		return schemas;
-	}
-
-
 	@Override
 	public Object executeStatement(String sql, String error, Object param) {
 		// TODO Auto-generated method stub

@@ -2,7 +2,7 @@ package com.yorker.imped.vo;
 
 import java.util.List;
 
-public class ExcelResponse extends XINEResponse {
+public class ExcelResponse extends ImpedResponse {
 
 	private List<Object> excelValues;
 

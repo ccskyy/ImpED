@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.yorker.imped.exceptions.XINEServiceException;
+import com.yorker.imped.exceptions.ImpedServiceException;
 import com.yorker.imped.vo.ExcelMetadataVO;
 import com.yorker.imped.vo.ExcelResponse;
 
@@ -31,7 +31,7 @@ public class ExcelReader {
     private static final Logger logger = Logger.getLogger(ExcelReader.class);
 	//loads the metadata needed for the UI to local memory
     //also creates a workbook object that is hereafter used to access the excel document.
-	public static List<ExcelMetadataVO> loadExcelMetadata(InputStream inputStream) throws InvalidFormatException , XINEServiceException{
+	public static List<ExcelMetadataVO> loadExcelMetadata(InputStream inputStream) throws InvalidFormatException , ImpedServiceException{
 		Sheet sheet = null;
 	    Row dataRow = null;
 	    Row headerRow = null;
@@ -45,19 +45,19 @@ public class ExcelReader {
 		    int lastCellNum = 0;
 		    sheet = workbook.getSheetAt(0);
 		    if(sheet == null) {
-		    	throw new XINEServiceException("ERROR-520", "Excel Sheet not found");
+		    	throw new ImpedServiceException("ERROR-520", "Excel Sheet not found");
 		    }
 		    if(sheet.getPhysicalNumberOfRows() < 2) {
-		    	throw new XINEServiceException("ERROR-521", "Excel Sheet should contain atleast two rows");
+		    	throw new ImpedServiceException("ERROR-521", "Excel Sheet should contain atleast two rows");
 		    }
 	        lastRowNum = sheet.getPhysicalNumberOfRows();
 	        headerRow = sheet.getRow(0);
 	        if(headerRow == null){
-	        	throw new XINEServiceException("ERROR-522", "Excel Sheet should contain header line");
+	        	throw new ImpedServiceException("ERROR-522", "Excel Sheet should contain header line");
 	        }
 	        dataRow = sheet.getRow(1);
 	        if(dataRow == null) {
-	        	throw new XINEServiceException("ERROR-523", "Excel Sheet should contain data line");
+	        	throw new ImpedServiceException("ERROR-523", "Excel Sheet should contain data line");
 	        }
 	        lastCellNum = headerRow.getLastCellNum();
 	        System.out.println("Excel sheet is: " + lastRowNum + " Rows by " + lastCellNum + " Columns");
@@ -76,9 +76,9 @@ public class ExcelReader {
 	            columnData.setNoOfCols(String.valueOf(lastCellNum));
 	            VOtable.add(columnData);
 	        }
-		} catch(XINEServiceException e){
-			logger.error("Could not able to show sample data. Error : " + XINEUtil.getErrorStackTrace(e));
-			throw new XINEServiceException(e.getErrorCode(),e.getMessage());
+		} catch(ImpedServiceException e){
+			logger.error("Could not able to show sample data. Error : " + ImpedUtil.getErrorStackTrace(e));
+			throw new ImpedServiceException(e.getErrorCode(),e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,7 +86,7 @@ public class ExcelReader {
 	}
     
     private static ExcelMetadataVO setColumnData(Sheet sheet, Integer columnNum, Cell headerCell, FormulaEvaluator evaluator, int lastRowNum,StringBuffer errors)
-    		throws InvalidFormatException, XINEServiceException
+    		throws InvalidFormatException, ImpedServiceException
     {
     	Row row = sheet.getRow(1);
     	ExcelMetadataVO colData = null;
@@ -131,7 +131,7 @@ public class ExcelReader {
 				colData = verifyBlank(sheet, columnNum, evaluator);
 			break;
 			case 4:
-				throw new XINEServiceException("ERROR-519", "Excel Sheet should not contain Boolean Values");
+				throw new ImpedServiceException("ERROR-519", "Excel Sheet should not contain Boolean Values");
 				//colData = verifyBoolean(sheet, columnNum, evaluator);
 			case 5:
 				//TODO: deal with error
@@ -281,7 +281,7 @@ public class ExcelReader {
     }
     
     private static ExcelMetadataVO verifyBlank(Sheet sheet, Integer columnNum, FormulaEvaluator evaluator)
-    	    throws InvalidFormatException, XINEServiceException
+    	    throws InvalidFormatException, ImpedServiceException
     {
     	ExcelMetadataVO colData = new ExcelMetadataVO();
     	System.out.println("Loading Blank data");
@@ -367,7 +367,7 @@ public class ExcelReader {
     	return out;
     }
 	
-	public ExcelResponse showExcelSampleData(InputStream inputStream) throws XINEServiceException {
+	public ExcelResponse showExcelSampleData(InputStream inputStream) throws ImpedServiceException {
 		ExcelResponse res = new ExcelResponse();
 		List<Object> values = new ArrayList<Object>();
 		Sheet sheet = null;
@@ -400,22 +400,22 @@ public class ExcelReader {
 		                	break;
 		            	case Cell.CELL_TYPE_NUMERIC:
 		            		if (HSSFDateUtil.isCellDateFormatted(cell)) {
-		        		    	values.add(XINEUtil.convertDateToString(cell.getDateCellValue().toString()));
+		        		    	values.add(ImpedUtil.convertDateToString(cell.getDateCellValue().toString()));
 		        		    } else {
 		        		    	values.add(cell.getNumericCellValue());
 		    				}
 		        		    break;
 		            	case Cell.CELL_TYPE_BOOLEAN:
-		            		throw new XINEServiceException("ERROR-519", "Excel Sheet should not contain Boolean Values");
+		            		throw new ImpedServiceException("ERROR-519", "Excel Sheet should not contain Boolean Values");
 		             }
 		        }
 		    }
 			res.setExcelValues(values);
-		}catch(XINEServiceException e){
-			logger.error("Could not able to show sample data. Error : " + XINEUtil.getErrorStackTrace(e));
-			throw new XINEServiceException(e.getErrorCode(),e.getMessage());
+		}catch(ImpedServiceException e){
+			logger.error("Could not able to show sample data. Error : " + ImpedUtil.getErrorStackTrace(e));
+			throw new ImpedServiceException(e.getErrorCode(),e.getMessage());
 		}catch(Exception e){
-			logger.error("Could not able to show sample data. Error : " + XINEUtil.getErrorStackTrace(e));
+			logger.error("Could not able to show sample data. Error : " + ImpedUtil.getErrorStackTrace(e));
 		}
 		return res;
 	}

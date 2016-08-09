@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.yorker.imped.exceptions.XINEServiceException;
+import com.yorker.imped.exceptions.ImpedServiceException;
 import com.yorker.imped.util.ExcelReaderV4;
-import com.yorker.imped.util.XINEUtil;
+import com.yorker.imped.util.ImpedUtil;
 import com.yorker.imped.vo.ExcelMetadataVO;
 import com.yorker.imped.vo.UploadExcelVO;
 
@@ -52,12 +52,12 @@ public class ExcelController {
 				vo.setMetadata(list);
 			}
 			vo.setResponseCode("success");
-		} catch (XINEServiceException e) {
+		} catch (ImpedServiceException e) {
 			logger.error("Could not able to describeData. Error : " + e.getErrorMessage());
 			vo.setResponseCode("fail");
 			vo.setResponseDesc("ERROR ::" +e.getErrorCode()+" :: " +e.getErrorMessage());
 		} catch (Exception e) {
-			logger.error("ExcelController.describeData failed. Error details :: "+ XINEUtil.getErrorStackTrace(e));
+			logger.error("ExcelController.describeData failed. Error details :: "+ ImpedUtil.getErrorStackTrace(e));
 		}
 		return vo;
 	}

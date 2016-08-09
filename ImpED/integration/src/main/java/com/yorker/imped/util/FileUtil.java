@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import com.yorker.imped.exceptions.XINEException;
+import com.yorker.imped.exceptions.ImpedException;
 public class FileUtil {
 	private static final Logger logger = Logger.getLogger(FileUtil.class);
 
@@ -33,7 +33,7 @@ public class FileUtil {
 			}
 
 		} catch (IOException e) {
-			logger.error("Exception occured while comparing files .."+ XINEUtil.getErrorStackTrace(e));
+			logger.error("Exception occured while comparing files .."+ ImpedUtil.getErrorStackTrace(e));
 		}
 		return flag;
 	}
@@ -87,9 +87,9 @@ public class FileUtil {
 	 *
 	 * @param processfile the path where you want to create file
 	 * @param fileContent the file content
-	 * @throws XINEException the XINE exception
+	 * @throws ImpedException the XINE exception
 	 */
-	public static void append2File(String processfile, String fileContent) throws XINEException {
+	public static void append2File(String processfile, String fileContent) throws ImpedException {
 		try {
 			File file = new File(processfile);
 			if (!file.exists()) {
@@ -101,7 +101,7 @@ public class FileUtil {
 	        bufferWritter.write(fileContent);
 	        bufferWritter.close();
 		} catch (IOException e) {
-			throw new XINEException(e.getMessage(),XINEConstants.ERROR_CODES.get("ERROR-500"));
+			throw new ImpedException(e.getMessage(),ImpedConstants.ERROR_CODES.get("ERROR-500"));
 		}
 	}
 	

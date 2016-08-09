@@ -5,76 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class XINEConstants {
-	public static final long SOURCE_MAX_ROW_CNT = 60000;
-	public static final String YES = "YES";
-	public static final String NO = "NO";
-	public static final String DYNAMIC = "DYNAMIC";
-	public static final int MAX_ROWS_SUBSET = 10000;
-	public static final int MAX_THREAD = 5;
-	public static final int MAX_SLEEP_FOR_RUNNING_THREAD = 30000;
-	public static final String TIDAL = "TIDAL";
-	public static final String EXTRACT_FROM_TD_TO_HDFS = "EXTRACT FROM TERADATA TO HDFS";
-	public static final String EXTRACT_FROM_MS_SQL_SERVER_TO_HDFS = "EXTRACT FROM MS-SQL-SERVER TO HDFS";
-	public static final String SRC_2_STAGE = "SOURCE TO STAGE";
-	public static final String WORK_2_3NF = "WORK TO 3NF";
-	public static final String STAGE_2_WORK = "STAGE TO WORK";
-	public static final String ACC_2_STAGE = "ACCUMULATION TO STAGE";
-	public static final String ACC_2_ETL = "ACCUMULATION TO ETL ONLY";
-	public static final String STAGE_2_ETL = "STAGE TO ETL ONLY";
-	public static final String SRC_2_HISTORY = "SOURCE TO HISTORY";
-	public static final String SRC_2_FLAT_FILE = "SOURCE TO FLAT FILE";
-	public static final String STAGE_2_3NF = "STAGE TO 3NF";
-	public static final int REC_FETCH_SIZE = 500;
-    public static final String DEF_LAST_EXT_DT = "01/01/1900 00:00:00";
-    public static final String DEF_LAST_EXT_DT_ACC2STG = "1900-01-01 00:00:00";
-    public static final String STAGE = "$$STGDB";
-    public static final String ERRDB = "$$ERRDB";
-    public static final String MGRSTGDB = "$$MGRSTGDB";
-    public static final String NRTACCUMVWDB = "$$NRTACCUMVWDB";
-    public static final String NRTACCUMDB = "$$NRTACCUMDB";
-    public static final String ETLONLYDB = "$$ETLONLYDB";
-    public static final String ETLVWDB = "$$ETLVWDB";
-    public static final String EDWTD_BATCH_ID = "$$BATCH_ID";
-    public static final String EDWTD_MAPPING_ID = "$$MAPPING_ID";
-    public static final String EDWTD_STEP_NUMBER = "$$STEP_NUMBER";
-    public static final String EDWTD_ACTION_CODE = "$$ACTION_CODE";
-    public static final String EDWTD_CREATE_DATETIME = "$$CREATE_DATETIME";
-    public static final String EDWTD_GLOBAL_NAME = "$$GLOBAL_NAME";
-    public static final String XINE_VIRTUAL_HOST ="$$XINE_VIRTUAL_HOST";
-    public static final String TD_SHARED_FOLDER ="$$TD_SHARED_FOLDER";
-    public static final String XN_SHELL_SCRIPT_HOME ="$$XN_SHELL_SCRIPT_HOME";
-    public static final String NF = "$$3NFDB";
-    public static final String WORK = "$$WORKDB";
-    public static final String AUTO = "AUTO";
-    public static final String STR_REF = "REF#";
-    public static final Map<String, Integer> HOST_TYPES;
-	static {
-		HOST_TYPES = new HashMap<String, Integer>();
-		HOST_TYPES.put("ORACLE", 1);
-		HOST_TYPES.put("TERADATA", 2);
-		HOST_TYPES.put("HIVE-HS1", 3);
-		HOST_TYPES.put("HIVE-HS2", 4);
-		HOST_TYPES.put("MYSQL", 5);
-		HOST_TYPES.put("MS-SQL-SERVER", 6);
-	}
-    public static final Map<String, Integer> ETL_TOOLS;
-	static {
-		ETL_TOOLS = new HashMap<String, Integer>();
-		ETL_TOOLS.put("SHELL SCRIPT", 1);
-		ETL_TOOLS.put("PYTHON", 2);
-		ETL_TOOLS.put("BTEQ", 3);
-		ETL_TOOLS.put("PL/SQL", 4);
-		ETL_TOOLS.put("ORACLE SQL", 4);
-		ETL_TOOLS.put("TERADATA SQL", 5);
-		ETL_TOOLS.put("HIVEQL-HS1", 6);
-		ETL_TOOLS.put("HIVEQL-HS2", 6);
-		ETL_TOOLS.put("DRILL", 6);
-		ETL_TOOLS.put("FTP", 7);
-		ETL_TOOLS.put("SFTP", 8);
-		ETL_TOOLS.put("HDPDL-DEP", 9);
-		ETL_TOOLS.put("EDWTD-DEP", 9);
-	}
+public class ImpedConstants {
+	//public static final int REC_FETCH_SIZE = 500;
+	public static final String STR_REF = "REF#";
 	public static final Map<String, String> ORACLE_DEFLT_VALUES;
 	static {
 		ORACLE_DEFLT_VALUES = new HashMap<String, String>();
@@ -85,20 +18,6 @@ public class XINEConstants {
 	static {
 		TD_DEFLT_VALUES = new HashMap<String, String>();
 		TD_DEFLT_VALUES.put("VARCHAR", "UNKNOWN");
-	}
-	public static final String XINE_ENV;
-	static{
-		XINE_ENV = System.getProperty("XINE_ENV") == null ? "DEV" :  System.getProperty("XINE_ENV");
-	}
-	public static final Map<String, String> JOB_EXEC_STATUS;
-	static {
-		JOB_EXEC_STATUS = new HashMap<String, String>();
-		JOB_EXEC_STATUS.put("HOLD", "HOLD");
-		JOB_EXEC_STATUS.put("SKIP", "SKIP");
-		JOB_EXEC_STATUS.put("PENDING", "PENDING");
-		JOB_EXEC_STATUS.put("RUNNING", "RUNNING");
-		JOB_EXEC_STATUS.put("COMPLETE", "COMPLETE");
-		JOB_EXEC_STATUS.put("FAILED", "FAILED");
 	}
 	public static final Map<String, String> ERROR_CODES;
 	static {

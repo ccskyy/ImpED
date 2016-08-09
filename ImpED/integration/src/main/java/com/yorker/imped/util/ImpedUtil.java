@@ -31,10 +31,10 @@ import javax.script.ScriptException;
 
 import org.apache.log4j.Logger;
 
-import com.yorker.imped.exceptions.XINEException;
+import com.yorker.imped.exceptions.ImpedException;
 
-public class XINEUtil {
-	private static final Logger logger = Logger.getLogger(XINEUtil.class);
+public class ImpedUtil {
+	private static final Logger logger = Logger.getLogger(ImpedUtil.class);
 	private static Properties envProperties = null;
 	private static Map<String,Properties> envMap = null;
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -61,51 +61,51 @@ public class XINEUtil {
 					fis = new FileInputStream(System.getProperty("XINE_HOME_DIR") + "/" + fileName);
 					envProperties.load(fis);
 				}else{
-					envProperties.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.common.properties"));
-					envProperties.load(XINEUtil.class.getClassLoader().getResourceAsStream(fileName));
+					envProperties.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.common.properties"));
+					envProperties.load(ImpedUtil.class.getClassLoader().getResourceAsStream(fileName));
 				}
 				System.out.println("Loaded xine environment properties....."+envProperties);
 			}
 			if (envType != null){
 				envMap = Collections.synchronizedMap(new HashMap<String,Properties>());
 				envProperties = new Properties();
-				envProperties.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.common.properties"));
+				envProperties.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.common.properties"));
 				switch (envType){
 					case "DEV" :
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.DV1.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.DV1.properties"));
 						envMap.put("DV1", env);
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.DV2.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.DV2.properties"));
 						envMap.put("DV2", env);
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.DV3.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.DV3.properties"));
 						envMap.put("DV3", env);
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.DV4.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.DV4.properties"));
 						envMap.put("DV4", env);
-						envProperties.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.DEV.properties"));
+						envProperties.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.DEV.properties"));
 						break;
 					case "TEST" :
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.TS1.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.TS1.properties"));
 						envMap.put("TS1", env);
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.TS2.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.TS2.properties"));
 						envMap.put("TS2", env);
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.TS3.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.TS3.properties"));
 						envMap.put("TS3", env);
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.TST.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.TST.properties"));
 						envMap.put("TST", env);
-						envProperties.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.TEST.properties"));
+						envProperties.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.TEST.properties"));
 						break;
 					case "PRODUCTION":
 						env = new Properties();
-						env.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.PROD1.properties"));
+						env.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.PROD1.properties"));
 						envMap.put("PROD1", env);
-						envProperties.load(XINEUtil.class.getClassLoader().getResourceAsStream("xine.PRODUCTION.properties"));
+						envProperties.load(ImpedUtil.class.getClassLoader().getResourceAsStream("xine.PRODUCTION.properties"));
 				}
 				System.out.println("Loaded xine environment properties....."+envMap);
 			}
@@ -192,7 +192,7 @@ public class XINEUtil {
 	}
 
 	public static String getTempFileName(String fileSuffix) {
-		return (getTempDirectory() + "/table_recds_" + XINEUtil.getCurrentTimeStamp().getTime() + "_" + fileSuffix + ".out");
+		return (getTempDirectory() + "/table_recds_" + ImpedUtil.getCurrentTimeStamp().getTime() + "_" + fileSuffix + ".out");
 	}
 
 	public static String getErrorStackTrace(Exception exception) {
@@ -539,7 +539,7 @@ public class XINEUtil {
 		StringBuffer errorList = new StringBuffer();
 		try {
 			triggerShellScript("rm " + getEnvProperty("xine.TD.checkpoint.file"),true);
-			cmd = "tbuild -f " + ctrlFile + " -v " + XINEUtil.getEnvProperty(envName,"xine.TD.jobvariable.folder") + "/job_variable_file.txt";
+			cmd = "tbuild -f " + ctrlFile + " -v " + ImpedUtil.getEnvProperty(envName,"xine.TD.jobvariable.folder") + "/job_variable_file.txt";
 			System.out.println("Command " + cmd + " > " + logFile);
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd + " > " + logFile);
 			Process shell = pb.start();
@@ -584,7 +584,7 @@ public class XINEUtil {
 		return errorList.toString();
 	}
 
-	public static Properties readPropsFile(String propFile) throws XINEException {
+	public static Properties readPropsFile(String propFile) throws ImpedException {
 		FileInputStream fis = null;
 		Properties props = new Properties();
 		try {
@@ -592,12 +592,12 @@ public class XINEUtil {
 			props.load(fis);
 
 		} catch (Exception e) {
-			throw new XINEException(e.getMessage(),XINEConstants.ERROR_CODES.get("ERROR-500"));
+			throw new ImpedException(e.getMessage(),ImpedConstants.ERROR_CODES.get("ERROR-500"));
 		}
 		return props;
 	}
 
-	public static String readFile(String logFile) throws XINEException {
+	public static String readFile(String logFile) throws ImpedException {
 		StringBuilder sb = new StringBuilder();
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile)))
 		{
@@ -607,12 +607,12 @@ public class XINEUtil {
 			}
 
 		} catch (IOException e) {
-			throw new XINEException(e.getMessage(),XINEConstants.ERROR_CODES.get("ERROR-501"),XINEConstants.ERROR_CODES_RESOL.get("ERROR-501"));
+			throw new ImpedException(e.getMessage(),ImpedConstants.ERROR_CODES.get("ERROR-501"),ImpedConstants.ERROR_CODES_RESOL.get("ERROR-501"));
 		}
 		return sb.toString();
 	}
 
-	private static long fetchRowsAppliedFromSqlLoaderLog(String logFile) throws XINEException {
+	private static long fetchRowsAppliedFromSqlLoaderLog(String logFile) throws ImpedException {
 		long recTransferred = -1;
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile)))
 		{
@@ -628,11 +628,11 @@ public class XINEUtil {
 			}
 
 		} catch (Exception e) {
-			throw new XINEException(e.getMessage(),XINEConstants.ERROR_CODES.get("ERROR-501"),XINEConstants.ERROR_CODES_RESOL.get("ERROR-501"));
+			throw new ImpedException(e.getMessage(),ImpedConstants.ERROR_CODES.get("ERROR-501"),ImpedConstants.ERROR_CODES_RESOL.get("ERROR-501"));
 		}
 		return recTransferred;
 	}
-	public static long fetchRowsAppliedFromLog(String hostType,String logFile) throws XINEException{
+	public static long fetchRowsAppliedFromLog(String hostType,String logFile) throws ImpedException{
 		long recTransferred = -1;
 		switch (hostType){
 			case "TERADATA" :
@@ -645,7 +645,7 @@ public class XINEUtil {
 		return recTransferred;
 	}
 
-	private static long fetchRowsAppliedFromTPTLog(String logFile) throws XINEException {
+	private static long fetchRowsAppliedFromTPTLog(String logFile) throws ImpedException {
 		long recTransferred = -1;
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile)))
 		{
@@ -675,7 +675,7 @@ public class XINEUtil {
 			}
 
 		} catch (IOException e) {
-			throw new XINEException(e.getMessage(),XINEConstants.ERROR_CODES.get("ERROR-501"),XINEConstants.ERROR_CODES_RESOL.get("ERROR-501"));
+			throw new ImpedException(e.getMessage(),ImpedConstants.ERROR_CODES.get("ERROR-501"),ImpedConstants.ERROR_CODES_RESOL.get("ERROR-501"));
 		}
 		return recTransferred;
 	}
@@ -685,9 +685,9 @@ public class XINEUtil {
 	 *
 	 * @param processfile the path where you want to create file
 	 * @param fileContent the file content
-	 * @throws XINEException the XINE exception
+	 * @throws ImpedException the XINE exception
 	 */
-	public static void writeFile(String processfile, String fileContent) throws XINEException {
+	public static void writeFile(String processfile, String fileContent) throws ImpedException {
 		File file = new File(processfile);
 		try (FileOutputStream fop = new FileOutputStream(file)) {
 			// if file doesn't exists, then create it
@@ -701,7 +701,7 @@ public class XINEUtil {
 			fop.flush();
 			fop.close();
 		} catch (IOException e) {
-			throw new XINEException(e.getMessage(),XINEConstants.ERROR_CODES.get("ERROR-500"));
+			throw new ImpedException(e.getMessage(),ImpedConstants.ERROR_CODES.get("ERROR-500"));
 		}
 	}
 	
