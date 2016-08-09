@@ -1,0 +1,93 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/lang 
+        http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+	<context:component-scan base-package="com.cisco.xine.controller" />
+	<!-- import resource="tiles-context.xml" /-->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+	</bean>
+
+ 	<bean id="viewResolver1" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="1"/>
+        <property name="location" value="/WEB-INF/views.xml"/>
+    </bean>
+    
+	<bean id="viewResolver2" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"/>
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	
+	<bean id="toolsManager" class="com.cisco.xine.service.ToolsManagerImpl"></bean>
+    <bean id="toolsDAO" class="com.cisco.xine.dao.ToolsDAOImpl">
+		<property name="dataSource" ref="xineDataSource" />
+	</bean>
+
+	<!-- enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="txManager"/><!-- a PlatformTransactionManager is still required -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- (this dependency is defined somewhere else) -->
+        <property name="dataSource" ref="xineDataSource"/>
+    </bean>
+
+	<mvc:annotation-driven />
+
+    <mvc:resources mapping="/resources/**" location="/resources/xine/" />
+    <mvc:default-servlet-handler />
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<mvc:interceptors>
+		<bean class="com.cisco.xine.interceptor.ImpEDInterceptor" />
+	</mvc:interceptors>
+	 
+        <jee:jndi-lookup id="jndiXINEDataSource" jndi-name="java:/comp/env/jdbc/XINEDataSource"
+		cache="false" resource-ref="true" lookup-on-startup="true"
+		proxy-interface="javax.sql.DataSource" />
+		
+		<alias name="jndiXINEDataSource" alias="xineDataSource" />
+	
+    <bean id="xineUtil" class="com.cisco.xine.util.XINEUtil"/>
+    <bean id="dateUtil" class="com.cisco.xine.util.DateUtil"/>
+	
+</beans>
