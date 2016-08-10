@@ -82,13 +82,13 @@ Servers/Tomcat v8.0 Server at localhost-config/tomcat-users.xml
 Servers/Tomcat v8.0 Server at localhost-config/web.xml
 *.diff
 .recommenders/
-eds-dataservice/presentation/bin/
-eds-dataservice/service/bin/
-#eds-dataservice/presentation/package/
+ImpED/presentation/bin/
+ImpED/service/bin/
+#ImpED/presentation/package/
 *.war
-eds-dataservice/tdgssconfig.jar
-eds-dataservice/terajdbc4.jar
-eds-dataservice/ojdbc6.jar
-eds-dataservice/presentation/src/main/webapp/WEB-INF/lib/ojdbc6.jar
-eds-dataservice/presentation/src/main/webapp/WEB-INF/lib/tdgssconfig.jar
-eds-dataservice/presentation/src/main/webapp/WEB-INF/lib/terajdbc4.jar
+ImpED/tdgssconfig.jar
+ImpED/terajdbc4.jar
+ImpED/ojdbc6.jar
+ImpED/presentation/src/main/webapp/WEB-INF/lib/ojdbc6.jar
+ImpED/presentation/src/main/webapp/WEB-INF/lib/tdgssconfig.jar
+ImpED/presentation/src/main/webapp/WEB-INF/lib/terajdbc4.jar
