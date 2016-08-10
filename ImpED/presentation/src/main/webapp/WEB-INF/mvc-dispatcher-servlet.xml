@@ -60,10 +60,10 @@
 	</bean>
 
 	
-	<bean id="toolsManager" class="com.yorker.imped.service.ToolsManagerImpl"></bean>
+	<!-- <bean id="toolsManager" class="com.yorker.imped.service.ToolsManagerImpl"></bean>
     <bean id="toolsDAO" class="com.yorker.imped.dao.ToolsDAOImpl">
 		<property name="dataSource" ref="impedDataSource" />
-	</bean>
+	</bean> -->
 
 	<!-- enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="txManager"/><!-- a PlatformTransactionManager is still required -->
